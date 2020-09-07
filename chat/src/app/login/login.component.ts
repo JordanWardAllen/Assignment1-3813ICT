@@ -36,12 +36,12 @@ export class LoginComponent implements OnInit {
 
       if (data.valid){  
       // alert("Correct");
-        sessionStorage.setItem('email', data.email);
-        sessionStorage.setItem('pwd', data.pwd);
-        sessionStorage.setItem('age', data.age);
-        sessionStorage.setItem('birthdate', data.birthdate);
-        sessionStorage.setItem('username', data.username);  
-        sessionStorage.setItem('valid', data.valid); 
+        localStorage.setItem('email', data.email);
+        localStorage.setItem('pwd', data.pwd);
+        localStorage.setItem('age', data.age);
+        localStorage.setItem('birthdate', data.birthdate);
+        localStorage.setItem('username', data.username);  
+        localStorage.setItem('valid', data.valid); 
         // this.authenticUser = true; 
         this.router.navigateByUrl('/');
       } else {

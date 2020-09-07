@@ -25,9 +25,9 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     
     this.initToConnection();
-    if (sessionStorage.getItem('valid')){
+    if (localStorage.getItem('valid')){
       this.isValid = true
-      console.log(sessionStorage.getItem('valid'))
+      console.log(localStorage.getItem('valid'))
     }
   }
 private initToConnection(){
