@@ -8,12 +8,14 @@ import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
-import { MessageService } from "./service/message.service"
+import { MessageService } from "./service/message.service";
+import { LoginComponent } from './login/login.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChatComponent
+    ChatComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, RouterModule,AppRoutingModule, FormsModule, HttpClientModule, CommonModule
