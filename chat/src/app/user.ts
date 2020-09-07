@@ -4,8 +4,8 @@ export class User  {
     birthdate: string;
     age: string;
     username: string;
-    valid: boolean;
-    constructor(email: string = "", pwd : string = "",birthdate: string = "",age: string = "", username:string = "", valid = false){
+    valid: string;
+    constructor(email: string = "", pwd : string = "",birthdate: string = "",age: string = "", username:string = "", valid: string =""){
         this.email = email;
         this.pwd = pwd;
         this.birthdate = birthdate;

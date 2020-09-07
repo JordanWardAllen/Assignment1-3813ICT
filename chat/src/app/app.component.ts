@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+
 
 
 @Component({
@@ -8,6 +11,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'chat';
-  constructor(){}
+  
+  // user: User = {username: sessionStorage.getItem("username"), birthdate: sessionStorage.getItem("birthdate"), age: sessionStorage.getItem("age"), email: sessionStorage.getItem("email"), pwd: sessionStorage.getItem("pwd"), valid: sessionStorage.getItem("valid") }
+  constructor(private router: Router){}
+
+  clearAndMove(){
+    sessionStorage.clear();
+    this.router.navigateByUrl('/login')
+  }
+
   
 }

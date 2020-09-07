@@ -24,9 +24,9 @@ app.get('/', function(req, res){
 
 app.post('/api/login',function(req,res){
     let users = [
-    {"email" : "email1","pwd" : "pwd1", "age": "5", "birthdate":"bd1", "valid": false}, 
-    {"email" : "email2","pwd" : "pwd2", "age": "6", "birthdate":"bd2", "valid": false},
-    {"email" : "email3","pwd" : "pwd3", "age": "10", "birthdate":"bd3", "valid": false}];   
+    {"email" : "email1","pwd" : "pwd1", "age": "5", "birthdate":"bd1", "valid": "true"}, 
+    {"email" : "email2","pwd" : "pwd2", "age": "6", "birthdate":"bd2", "valid": "true"},
+    {"email" : "email3","pwd" : "pwd3", "age": "10", "birthdate":"bd3", "valid": "true"}];   
 
     if (!req.body) {
         return res.sendStatus(400);

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterService } from "../service/register.service";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../User';
+import { User } from '../user';
 import { Observable } from "rxjs";
 
 
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   email="";
   pwd="";
+  
 
   constructor(private router: Router, public registerService: RegisterService, private http:HttpClient) { }
 
@@ -39,8 +40,10 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('pwd', data.pwd);
         sessionStorage.setItem('age', data.age);
         sessionStorage.setItem('birthdate', data.birthdate);
-        sessionStorage.setItem('username', data.username);   
-        this.router.navigateByUrl('/chat');
+        sessionStorage.setItem('username', data.username);  
+        sessionStorage.setItem('valid', data.valid); 
+        // this.authenticUser = true; 
+        this.router.navigateByUrl('/');
       } else {
         alert("Wrong credentials");
         

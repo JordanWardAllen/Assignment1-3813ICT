@@ -7,6 +7,8 @@ import { MessageService } from '../service/message.service'
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+
+  isValid: boolean = false
   current =  0;
   messagecontent: string = "";
   messages: string[] = [];
@@ -23,6 +25,10 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     
     this.initToConnection();
+    if (sessionStorage.getItem('valid')){
+      this.isValid = true
+      console.log(sessionStorage.getItem('valid'))
+    }
   }
 private initToConnection(){
   this.messageService.initSocket();
@@ -45,5 +51,8 @@ chat(messagecontent){
       console.log('Failed to send message. Make sure text box is not empty.')
     }
   }
+
+
+
 
 }
