@@ -12,13 +12,10 @@ export class ChatComponent implements OnInit {
   current =  0;
   messagecontent: string = "";
   messages: string[] = [];
-  currentTime: number[] = [];
   ioConnection: any;
+  stringJson: any;
+  stringObj: any[];
 
-
-  date = Math.round(new Date().getTime()/1000);
-
-  
 
   constructor(private messageService : MessageService) { }
 
@@ -30,29 +27,29 @@ export class ChatComponent implements OnInit {
       console.log(localStorage.getItem('valid'))
     }
   }
+
 private initToConnection(){
   this.messageService.initSocket();
   this.ioConnection = this.messageService.onMessage().subscribe((message: string)=> {
     this.messages.push(message);
-
-    
   });
+
 }
 
 
 chat(messagecontent){
-  this.current = Date.now()
-  this.currentTime.push(this.current);
+
+  // this.stringObj['Chat'].push(messagecontent)
+  // this.stringJson = JSON.stringify(this.stringObj)
+  // console.log(this.stringJson)
+
   this.current = null;
     if (this.messagecontent){
       this.messageService.send(this.messagecontent);
+      this.messageService.sendChat(this.messagecontent);
       this.messagecontent = null;
     } else {
       console.log('Failed to send message. Make sure text box is not empty.')
     }
   }
-
-
-
-
 }

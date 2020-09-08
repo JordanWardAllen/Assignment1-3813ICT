@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(private router: Router){}
 
   clearAndMove(){
-    sessionStorage.clear();
+    localStorage.clear();
     this.router.navigateByUrl('/login')
   }
 
