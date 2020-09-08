@@ -57,8 +57,20 @@ export class RegisterService {
   }
 
 
-  public send(auth: any): void {
+  public sendAuth(auth: any): void {
     this.socket.emit('auth', auth);
+  }
+
+  public sendNewUser(user: any): void {
+    this.socket.emit('user', user);
+  }
+
+
+  public onSubmit(): Observable<any> {
+    let observable = new Observable(observer=>{
+      this.socket.on('user', (data: any) => observer.next(data));
+    })
+    return observable;
   }
 
   public onLogin(): Observable<any> {

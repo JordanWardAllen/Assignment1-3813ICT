@@ -44,7 +44,7 @@ this.registerService.initSocket();
 public loginfunc(email, pwd){
   
     this.credentials = { email: this.email, pwd: this.pwd}
-    this.registerService.send(this.credentials);
+    this.registerService.sendAuth(this.credentials);
 
     this.ioConnection = this.registerService.onLogin().subscribe((auth: any)=> {
       localStorage.setItem('email', auth.email);

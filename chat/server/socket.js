@@ -20,11 +20,11 @@ module.exports = {
                     
                     fileData.Chat.push(chat)
                     stringedData = JSON.stringify(fileData)
-                    console.log(stringedData)
+                    // console.log(stringedData)
                     
                     fs.writeFile('../dataExternal.json', stringedData, (err) =>{
                         if (err) throw err;
-                        console.log(stringedData)
+                        // console.log(stringedData)
                     })
                 })
             }),
@@ -56,7 +56,26 @@ module.exports = {
                     }
                 } 
                 io.emit('auth', customer);
-                console.log(customer); 
+                // console.log(customer); 
+            })
+        }),
+        socket.on('user', (user) =>{
+            // console.log(user)
+
+            fs.readFile('../dataExternal.json', (err, data) => {
+                if (err) throw err;
+                var fileData = JSON.parse(data)
+                // console.log(fileData.User[1])
+                
+                fileData.User.push(user)
+                // console.log(fileData)
+                stringedData = JSON.stringify(fileData)
+                // console.log(stringedData)
+                
+                fs.writeFile('../dataExternal.json', stringedData, (err) =>{
+                    if (err) throw err;
+                    // console.log(stringedData)
+                })
             })
         })
 

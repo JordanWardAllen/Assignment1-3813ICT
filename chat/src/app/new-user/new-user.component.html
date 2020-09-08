@@ -1,1 +1,16 @@
-<p>new-user works!</p>
+<h2>Create new user</h2>
+<form>
+    <label>Email: </label>
+    <input type="text" [(ngModel)]="email" name="email">
+    <label>Password: </label>
+    <input type="text" [(ngModel)]="pwd" name="pwd">
+    <label>Age: </label>
+    <label>Birthdate: </label>
+    <input type="text" [(ngModel)]="birthdate" name="birthdate">
+    <input type="text" [(ngModel)]="age" name="age">
+    <label>Username: </label>
+    <input type="text" [(ngModel)]="username" name="username">
+</form>
+<button (click)="createUser()">submit</button>
+
+
