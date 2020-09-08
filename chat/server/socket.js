@@ -14,19 +14,19 @@ module.exports = {
                 // console.log(chat)
                 // io.emit('chat', chat);
 
-                // fs.readFile('../src/assets/data.json', (err, data) => {
-                //     if (err) throw err;
-                //     var fileData = JSON.parse(data)
+                fs.readFile('../dataExternal.json', (err, data) => {
+                    if (err) throw err;
+                    var fileData = JSON.parse(data)
                     
-                //     fileData.Chat.push(chat)
-                //     stringedData = JSON.stringify(fileData)
-                //     console.log(stringedData)
+                    fileData.Chat.push(chat)
+                    stringedData = JSON.stringify(fileData)
+                    console.log(stringedData)
                     
-                //     fs.writeFile('../src/assets/data.json', stringedData, (err) =>{
-                //         if (err) throw err;
-                //         console.log(stringedData)
-                //     })
-                // })
+                    fs.writeFile('../dataExternal.json', stringedData, (err) =>{
+                        if (err) throw err;
+                        console.log(stringedData)
+                    })
+                })
             })
 
         });
