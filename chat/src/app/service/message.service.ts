@@ -20,29 +20,13 @@ export class MessageService {
   stringObj: any[];
   
 
+  constructor(private http: HttpClient ) { }
 
-// public jsonfile = exampleData;
-
-  constructor(private http: HttpClient ) {
-    // var obj;
-    
-  //   this.getJSON().subscribe(data=> obj=data, error => console.log(error))
-   }
-
-
-
-  //  public getJSON(): Observable<any> {
-  //   return this.http.get("../data")
-  //   .map((res:any) => res.json())
-  //  }
 
   public initSocket(): void {
     this.socket = io(SERVER_URL);
   }
-  // public getJSON(): Observable<any> {
-  //   return this.http.get("../assets/data.json")
-      
-  //  }
+
    public sendChat(chat: any): void {
     this.socket.emit('chat', chat);
   }

@@ -21,33 +21,48 @@ export class LoginComponent implements OnInit {
 
   email="";
   pwd="";
+  test = {}
+  credentials = {}
+  ioConnection: any;
+  isValid = ""
   
 
   constructor(private router: Router, public registerService: RegisterService, private http:HttpClient) { }
 
 
   ngOnInit() {  
-  }
-  
-  public loginfunc(){
-    let user = { pwd: this.pwd, email: this.email};
-    this.http.post(backend_url + '/api/login', user, httpOptions).subscribe((data: any) => {
-      console.log(data)
+  this.initToConnection();
 
-      if (data.valid){  
-      // alert("Correct");
-        localStorage.setItem('email', data.email);
-        localStorage.setItem('pwd', data.pwd);
-        localStorage.setItem('age', data.age);
-        localStorage.setItem('birthdate', data.birthdate);
-        localStorage.setItem('username', data.username);  
-        localStorage.setItem('valid', data.valid); 
-        // this.authenticUser = true; 
+  }
+
+
+private initToConnection(){
+this.registerService.initSocket();
+
+}
+
+public loginfunc(email, pwd){
+  
+    this.credentials = { email: this.email, pwd: this.pwd}
+    this.registerService.send(this.credentials);
+
+    this.ioConnection = this.registerService.onLogin().subscribe((auth: any)=> {
+      localStorage.setItem('email', auth.email);
+      localStorage.setItem('pwd', auth.pwd);
+      localStorage.setItem('age', auth.age);
+      localStorage.setItem('birthdate', auth.birthdate);
+      localStorage.setItem('username', auth.username);  
+      localStorage.setItem('valid', auth.valid); 
+      console.log(localStorage.getItem('email'))
+      if (localStorage.getItem('valid') == "true"){
+        this.isValid == "true"
         this.router.navigateByUrl('/');
       } else {
-        alert("Wrong credentials");
-        
+        this.isValid == "false"
       }
-    })
+    });
+
   }
 }
+  
+

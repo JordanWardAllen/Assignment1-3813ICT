@@ -1,1 +1,9 @@
-{"Chat":["example glossary","msg","test","asc","test","test","test1234ABC"]}
+{ 
+    "Chat":
+        ["example glossary","msg","test","asc","test","test","test1234ABC"],
+
+    "User":
+        [{"email" : "email1","pwd" : "pwd1", "age": "5", "birthdate":"bd1", "valid": "true"}, 
+        {"email" : "email2","pwd" : "pwd2", "age": "6", "birthdate":"bd2", "valid": "true"},
+        {"email" : "email3","pwd" : "pwd3", "age": "10", "birthdate":"bd3", "valid": "true"}]
+}

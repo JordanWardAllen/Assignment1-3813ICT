@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
+import * as io from 'socket.io-client';
 
+
+const SERVER_URL = 'http://localhost:3000/'; 
 
 interface POST {
   title: string;
@@ -22,6 +25,7 @@ export class RegisterService {
   url = "";
   body = "";
   jsonItems = {};
+  private socket;
 
   setItem(key, item){
     this.jsonItems[key] = item
@@ -48,5 +52,32 @@ export class RegisterService {
       }
   );
   }
+  public initSocket(): void {
+    this.socket = io(SERVER_URL);
+  }
+
+
+  public send(auth: any): void {
+    this.socket.emit('auth', auth);
+  }
+
+  public onLogin(): Observable<any> {
+    let observable = new Observable(observer=>{
+      this.socket.on('auth', (data: any) => observer.next(data));
+    })
+    return observable;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
