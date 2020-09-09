@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from "../service/register.service";
+import { Router } from '@angular/router';
 
 
 
@@ -11,7 +12,7 @@ import { RegisterService } from "../service/register.service";
 })
 export class NewUserComponent implements OnInit {
 
-  constructor(private registerService : RegisterService) { }
+  constructor(private registerService : RegisterService, private router : Router) { }
   currentUserCount = Number(localStorage.getItem('userCount'))
   username ="";
   userId : number = this.currentUserCount + 1;
@@ -21,13 +22,14 @@ export class NewUserComponent implements OnInit {
   newUser = {};
   isSuper : boolean = false;
   elseBlock ="";
+  LoggedInUserRole = localStorage.getItem('role');
 
 
   ioConnection: any;
  
   ngOnInit(): void {
     this.initToConnection();
-    if (localStorage.getItem('role') == "Super"){
+    if (localStorage.getItem('role') == "Super" || localStorage.getItem('role') == "Group Admin" ){
       this.isSuper = true;   
   } else {
       this.isSuper = false;
@@ -40,7 +42,7 @@ export class NewUserComponent implements OnInit {
     }
 
   public createUser(){
-    this.newUser = {email: this.email, pwd: this.pwd, userId: this.userId, role: this.role, username: this.username, valid : "true"};
+    this.newUser = {email: this.email, pwd: this.pwd, userId: this.userId, role: this.role, username: this.username, valid : "true", LoggedInUserRole: this.LoggedInUserRole};
     this.registerService.sendNewUser(this.newUser);
     this.newUser = null;
     this.username ="";
@@ -48,6 +50,7 @@ export class NewUserComponent implements OnInit {
     this.email = "";
     this.pwd = "";
     this.role = "";
+    this.router.navigateByUrl('profiles');
     
   }
 

@@ -77,10 +77,15 @@ module.exports = {
             })
         }),
         socket.on('user', (user) =>{
-            console.log('user')
-
+            console.log(user.LoggedInUserRole)
             fs.readFile('../dataExternal.json', (err, data) => {
                 if (err) throw err;
+                if (user.LoggedInUserRole == "Super"){
+                    user.role = "Group Admin";
+                } else if (user.LoggedInUserRole == "Group Admin"){
+                    user.role = "Group Assis";
+                }
+                
                 var fileData = JSON.parse(data)
                 fileData.User.push(user)
                 stringedData = JSON.stringify(fileData)
