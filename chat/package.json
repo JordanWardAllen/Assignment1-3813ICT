@@ -21,6 +21,7 @@
     "@angular/router": "~10.0.14",
     "@types/socket.io-client": "^1.4.33",
     "bootstrap": "^4.5.2",
+    "random-int": "^2.0.1",
     "rxjs": "~6.5.5",
     "rxjs-compat": "^6.6.3",
     "socket.io": "^2.3.0",

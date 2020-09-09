@@ -1,37 +1,41 @@
-<div *ngIf="isSuperOrGroup">
-
-
-    <h3>Elevate existing user to superuser</h3>
-    <form>
-        <label>User ID to upgrade: </label>
-        <input type="text" [(ngModel)]="userIdToUpgrade" name="userIdToUpgrade">
-    </form>
-    <button (click)="upgradeUser(userIdToUpgrade)">submit</button>
-
-
-    
+<div class="container">
     <div *ngIf="isSuper">
-        <h3>Super Admin user deletion form</h3>
-        <form>
-            <label>User ID to Delete: </label>
-            <input type="text" [(ngModel)]="deletedUserId" name="deletedUserId">
-        </form>
-        <button (click)="deleteUser(deletedUserId)">submit</button>
+        <div class="bg-light d-flex justify-content-center">
+            <div class="form-group"> 
+                <form>
+                        <h4>Upgrade to Super</h4>
 
+                        <input type="text" class="form-control" id="userUpgrade" [(ngModel)]="userIdToUpgrade" placeholder="Enter User ID:" name="userIdToUpgrade">
 
+                        <div  class="form-group">
+                            <button (click)="upgradeUser(userIdToUpgrade)" class="btn btn-primary">Upgrade</button>
+                </div>
+                </form>
+                <h4>User deletion</h4>
+                <form>
+                    <input type="text" class="form-control" id="userDeletion"  placeholder="Enter User ID:"[(ngModel)]="deletedUserId" name="deletedUserId">
+                </form>
+
+                <button (click)="deleteUser(deletedUserId)" class="btn btn-primary">Delete</button>
+
+            </div>
+        </div>
     </div>
+    <table class="table table-dark table-bordered table-responsive-md">
+        <tr>
+            <th>Users</th>  
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td *ngFor="let username of usernames" >{{username}}</td>
+        </tr>
+        <tr>
+            <td>User ID</td>
+            <td *ngFor="let userId of userIds" >{{userId}}</td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td *ngFor="let role of userRole" >{{role}}</td>
+        </tr>
+    </table>
 </div>
-<table>
-    <tr>
-        <th>Users</th>  
-    </tr>
-    <tr>
-        <td>Username</td>
-        <td *ngFor="let username of usernames" >{{username}}</td>
-    </tr>
-    <tr>
-        <td>User ID</td>
-        <td *ngFor="let userId of userIds" >{{userId}}</td>
-
-    </tr>
-</table>

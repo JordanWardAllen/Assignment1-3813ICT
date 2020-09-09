@@ -134,7 +134,7 @@ module.exports = {
                 var fileData = JSON.parse(data)  
                 for (let i = 0; i< fileData.User.length; i++){
                     if (fileData.User[i].userId == userIdToUpgrade){
-                        fileData.User[i].role = "super"
+                        fileData.User[i].role = "Super"
                         console.log(fileData.User[i])
                     }
                 }   

@@ -1,14 +1,12 @@
 <div id="HomepageNavbar">
- <nav class="navbar navbar-default">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
   <ul class="nav navbar-nav">
   <li class="active"><a class="nav-link" routerLink="/">Home</a></li>
-  <!-- <li><a class="nav-link" routerLink="/chat">chat</a></li>
-  <li><a class="nav-link" routerLink="/login">login</a></li> -->
   <li><a class="nav-link" routerLink="/register">register</a></li>
   <li><a class="nav-link" routerLink="/profiles">profiles</a></li>
   </ul>
-  <button (click)="clearAndMove()">LogOut</button>
+  <button (click)="clearAndMove()" class="btn btn-primary">LogOut</button>
   </div>
  </nav>
 </div>

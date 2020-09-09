@@ -1,8 +1,16 @@
-<form>
-    <label>Email: </label>
-    <input type="text" [(ngModel)]="email" name="email">
-    <label>Password: </label>
-    <input type="text" [(ngModel)]="pwd" name="pwd">
+   
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="form-group">
+        <form>
+            <label>Email: </label>
+            <input type="text" class="form-control" placeholder="Enter Email:" [(ngModel)]="email" name="email">
+            <label>Password: </label>
+            <input type="text" class="form-control" placeholder="Enter Password:"[(ngModel)]="pwd" name="pwd">
 
-</form>
-<button (click)="loginfunc(email, pwd)">submit</button>
+            <br>
+            <button (click)="loginfunc(email, pwd)" class="btn btn-primary">Login</button>
+        </form>
+        </div>
+    </div>
+</div>
