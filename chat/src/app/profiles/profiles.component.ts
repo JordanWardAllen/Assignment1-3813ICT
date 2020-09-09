@@ -12,22 +12,32 @@ export class ProfilesComponent implements OnInit {
   constructor(public registerService: RegisterService, private router :Router) { }
 
   ListOfusers = [];
+  userIdToUpgrade = "";
   usernames = []
   userIds = []
   deletedUserId = "";
   ioConnection: any;
-  isSuper : boolean = false
+  isSuper : boolean = false;
+  isSuperOrGroup : boolean = false;
 
   ngOnInit(): void {
     this.initToConnection();
     this.getUsers();
-    if (localStorage.getItem('role')){
-      this.isSuper = true
+    if (localStorage.getItem('role') == "Group"){
+      // this.isSuper = true;
+      this.isSuperOrGroup = true;
       console.log(localStorage.getItem('role'))
-    }
+    } else if (localStorage.getItem('role') == "Super"){
+        this.isSuperOrGroup = true;
+        this.isSuper = true;
     
-    
+  } else {
+
+      this.isSuper = false;
+      this.isSuperOrGroup = false;
   }
+
+}
 
   private initToConnection(){
     this.registerService.initSocket();
@@ -47,7 +57,11 @@ export class ProfilesComponent implements OnInit {
     });
   }
 
+  public upgradeUser(userIdToUpgrade){
+    this.registerService.sendUpgradeUser(this.userIdToUpgrade)
+    this.userIdToUpgrade = ""
 
+  }
   public deleteUser(deletedUserId){
     this.registerService.sendDeletedUser(this.deletedUserId);
     this.deletedUserId = null;

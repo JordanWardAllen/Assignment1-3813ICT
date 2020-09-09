@@ -1,17 +1,29 @@
-<div *ngIf="isSuper">
-    <h3>Super Admin user deletion form</h3>
-<form>
-    <label>User ID to Delete: </label>
-    <input type="text" [(ngModel)]="deletedUserId" name="deletedUserId">
-</form>
-<button (click)="deleteUser(deletedUserId)">submit</button>
+<div *ngIf="isSuperOrGroup">
 
 
+    <h3>Elevate existing user to superuser</h3>
+    <form>
+        <label>User ID to upgrade: </label>
+        <input type="text" [(ngModel)]="userIdToUpgrade" name="userIdToUpgrade">
+    </form>
+    <button (click)="upgradeUser(userIdToUpgrade)">submit</button>
+
+
+    
+    <div *ngIf="isSuper">
+        <h3>Super Admin user deletion form</h3>
+        <form>
+            <label>User ID to Delete: </label>
+            <input type="text" [(ngModel)]="deletedUserId" name="deletedUserId">
+        </form>
+        <button (click)="deleteUser(deletedUserId)">submit</button>
+
+
+    </div>
 </div>
 <table>
     <tr>
-        <th>Users</th>
-        
+        <th>Users</th>  
     </tr>
     <tr>
         <td>Username</td>

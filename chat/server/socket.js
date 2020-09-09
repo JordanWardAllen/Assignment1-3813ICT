@@ -127,6 +127,24 @@ module.exports = {
             console.log('init')
             io.emit('getUsers', fileData.User);
             
+        }),
+        socket.on('userIdToUpgrade', (userIdToUpgrade) =>{
+            fs.readFile('../dataExternal.json', (err, data) => {
+                if (err) throw err;
+                var fileData = JSON.parse(data)  
+                for (let i = 0; i< fileData.User.length; i++){
+                    if (fileData.User[i].userId == userIdToUpgrade){
+                        fileData.User[i].role = "super"
+                        console.log(fileData.User[i])
+                    }
+                }   
+                stringedData = JSON.stringify(fileData)  
+                fs.writeFile('../dataExternal.json', stringedData, (err) =>{
+                    if (err) throw err;
+                    console.log("Write attempt")
+                    console.log(stringedData)
+                })        
+            })
         })
 
         });

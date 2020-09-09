@@ -69,6 +69,12 @@ export class RegisterService {
     this.socket.emit('deletedUserId', deletedUserId);
   }
 
+  public sendUpgradeUser(userIdToUpgrade: any): void {
+    this.socket.emit('userIdToUpgrade', userIdToUpgrade);
+  }
+
+  
+
 
   // public onSubmit(): Observable<any> {
   //   let observable = new Observable(observer=>{
