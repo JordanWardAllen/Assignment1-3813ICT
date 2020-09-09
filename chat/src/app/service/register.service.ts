@@ -53,7 +53,7 @@ export class RegisterService {
   );
   }
   public initSocket(): void {
-    this.socket = io(SERVER_URL);
+    this.socket = io(SERVER_URL);    
   }
 
 
@@ -65,10 +65,29 @@ export class RegisterService {
     this.socket.emit('user', user);
   }
 
+  public sendDeletedUser(deletedUserId: any): void {
+    this.socket.emit('deletedUserId', deletedUserId);
+  }
 
-  public onSubmit(): Observable<any> {
+
+  // public onSubmit(): Observable<any> {
+  //   let observable = new Observable(observer=>{
+  //     this.socket.on('user', (data: any) => observer.next(data));
+  //   })
+  //   return observable;
+  // }
+
+  public onInit(): Observable<any> {
     let observable = new Observable(observer=>{
-      this.socket.on('user', (data: any) => observer.next(data));
+      this.socket.on('getUsers', (data: any) => observer.next(data));
+    })
+    return observable;
+  }
+
+
+  public onDelete(): Observable<any> {
+    let observable = new Observable(observer=>{
+      this.socket.on('users', (data: any) => observer.next(data));
     })
     return observable;
   }

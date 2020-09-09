@@ -13,10 +13,10 @@ export class NewUserComponent implements OnInit {
   constructor(private registerService : RegisterService) { }
 
   username ="";
-  age = "";
+  userId = (Math.random()*(10)).toString();
   email = "";
   pwd = "";
-  birthdate = "";
+  role = "";
   newUser = {}
 
 
@@ -32,14 +32,14 @@ export class NewUserComponent implements OnInit {
     }
 
   public createUser(){
-    this.newUser = {email: this.email, pwd: this.pwd, age: this.age , birthdate: this.birthdate, username: this.username, valid : "true"};
-    // console.log(this.newUser)
+    this.newUser = {email: this.email, pwd: this.pwd, userId: this.userId , role: this.role, username: this.username, valid : "true"};
     this.registerService.sendNewUser(this.newUser);
+    this.newUser = null;
     this.username ="";
-    this.age = "";
+    this.userId = "";
     this.email = "";
     this.pwd = "";
-    this.birthdate = "";
+    this.role = "";
     
   }
 

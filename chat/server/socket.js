@@ -1,9 +1,26 @@
 const fs = require('fs');
 const file = require('../src/assets/data.json')
+// fs.readFile('../dataExternal.json', (err, data) => {
+//     if (err) throw err;
+//     fileData = JSON.parse(data)   
+//     // console.log(deletedUserId)
+//     // console.log(fileData.User[0])            
+// })
 
 module.exports = {
     connect: function(io, PORT){
         io.on('connection', (socket)=> {
+            // console.log('socket getUsers fired')
+            fs.readFile('../dataExternal.json', (err, data) => {
+                if (err) throw err;
+                fileData = JSON.parse(data)   
+                // console.log(deletedUserId)
+                // console.log(fileData.User[0])        
+                io.emit('getUsers', fileData.User);    
+            })
+            // console.log(fileData)
+            
+
         console.log("User connection on port" + PORT + ":" + socket.id);
             socket.on('message', (message)=>{
                 io.emit('message', message);
@@ -41,8 +58,8 @@ module.exports = {
                 var customer = {};
                 customer.email = "";
                 customer.pwd = "";
-                customer.age = "";
-                customer.birthdate = "";
+                customer.id = "";
+                customer.role = "";
                 customer.username = "";
                 customer.valid = "false";
 
@@ -50,8 +67,8 @@ module.exports = {
                     if (auth.email == fileData.User[i].email && auth.pwd == fileData.User[i].pwd){  
                         customer.email = fileData.User[i].email;
                         customer.pwd = fileData.User[i].pwd;
-                        customer.age = fileData.User[i].age;
-                        customer.birthdate = fileData.User[i].birthdate;
+                        customer.id = fileData.User[i].id;
+                        customer.role = fileData.User[i].role;
                         customer.valid = "true";
                     }
                 } 
@@ -60,23 +77,56 @@ module.exports = {
             })
         }),
         socket.on('user', (user) =>{
-            // console.log(user)
+            console.log('user')
 
             fs.readFile('../dataExternal.json', (err, data) => {
                 if (err) throw err;
                 var fileData = JSON.parse(data)
-                // console.log(fileData.User[1])
-                
                 fileData.User.push(user)
-                // console.log(fileData)
                 stringedData = JSON.stringify(fileData)
-                // console.log(stringedData)
-                
+
                 fs.writeFile('../dataExternal.json', stringedData, (err) =>{
                     if (err) throw err;
                     // console.log(stringedData)
                 })
             })
+        }),
+        socket.on('deletedUserId' , (deletedUserId) =>{
+            // console.log(deletedUserId)
+
+            fs.readFile('../dataExternal.json', (err, data) => {
+                if (err) throw err;
+                var fileData = JSON.parse(data)   
+                for (let i = 0; i< fileData.User.length; i++){
+                    if (fileData.User[i].userId == deletedUserId){
+                        console.log('it fired')
+                        fileData.User.splice(i, 1);
+                        // delete fileData.User[i];
+                    }
+                }
+                
+                stringedData = JSON.stringify(fileData)  
+                console.log(stringedData)             
+                fs.writeFile('../dataExternal.json', stringedData, (err) =>{
+                    if (err) throw err;
+                    console.log("Write attempt")
+                    console.log(stringedData)
+                })
+                io.emit('getUsers', fileData.User);
+            })
+        }),
+        socket.on('getUsers', (getUsers)=>{
+            console.log('socket getUsers fired')
+            // socket.emit('getUsers', fileData.User);
+            fs.readFile('../dataExternal.json', (err, data) => {
+                if (err) throw err;
+                var fileData = JSON.parse(data)   
+                // console.log(deletedUserId)
+                console.log(fileData.User[0])            
+            })
+            console.log('init')
+            io.emit('getUsers', fileData.User);
+            
         })
 
         });

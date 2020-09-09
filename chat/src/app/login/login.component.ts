@@ -36,10 +36,17 @@ export class LoginComponent implements OnInit {
   }
 
 
-private initToConnection(){
-this.registerService.initSocket();
+  private initToConnection(){
 
-}
+    this.registerService.initSocket();
+    if (localStorage.getItem('valid') == "true"){
+        this.isValid == "true"
+        this.router.navigateByUrl('chat');
+    } else {
+        this.isValid == "false"
+    }
+
+  }
 
 public loginfunc(email, pwd){
   
@@ -47,16 +54,13 @@ public loginfunc(email, pwd){
     this.registerService.sendAuth(this.credentials);
 
     this.ioConnection = this.registerService.onLogin().subscribe((auth: any)=> {
-      localStorage.setItem('email', auth.email);
-      localStorage.setItem('pwd', auth.pwd);
-      localStorage.setItem('age', auth.age);
-      localStorage.setItem('birthdate', auth.birthdate);
       localStorage.setItem('username', auth.username);  
+      localStorage.setItem('role', auth.role);  
       localStorage.setItem('valid', auth.valid); 
-      console.log(localStorage.getItem('email'))
+      console.log(localStorage.getItem('email'));
       if (localStorage.getItem('valid') == "true"){
         this.isValid == "true"
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('chat');
       } else {
         this.isValid == "false"
       }

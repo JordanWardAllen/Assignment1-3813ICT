@@ -1,0 +1,25 @@
+<div *ngIf="isSuper">
+    <h3>Super Admin user deletion form</h3>
+<form>
+    <label>User ID to Delete: </label>
+    <input type="text" [(ngModel)]="deletedUserId" name="deletedUserId">
+</form>
+<button (click)="deleteUser(deletedUserId)">submit</button>
+
+
+</div>
+<table>
+    <tr>
+        <th>Users</th>
+        
+    </tr>
+    <tr>
+        <td>Username</td>
+        <td *ngFor="let username of usernames" >{{username}}</td>
+    </tr>
+    <tr>
+        <td>User ID</td>
+        <td *ngFor="let userId of userIds" >{{userId}}</td>
+
+    </tr>
+</table>

@@ -17,7 +17,7 @@ export class AppComponent {
 
   clearAndMove(){
     localStorage.clear();
-    this.router.navigateByUrl('/login')
+    this.router.navigateByUrl('/')
   }
 
   

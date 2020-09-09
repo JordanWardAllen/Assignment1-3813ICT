@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
 import { LoginComponent } from './login/login.component';
 import { NewUserComponent } from './new-user/new-user.component';
+import { ProfilesComponent } from './profiles/profiles.component';
 
 const routes: Routes = [
-  {path: '', component: ChatComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: NewUserComponent}
+  {path: 'chat', component: ChatComponent},
+  {path: '', component: LoginComponent},
+  {path: 'register', component: NewUserComponent},
+  {path: 'profiles', component: ProfilesComponent}
   // {path: 'chat', component: ChatComponent}
 ];
 

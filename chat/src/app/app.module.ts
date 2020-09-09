@@ -10,14 +10,16 @@ import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
 import { MessageService } from "./service/message.service";
 import { LoginComponent } from './login/login.component';
-import { NewUserComponent } from './new-user/new-user.component'
+import { NewUserComponent } from './new-user/new-user.component';
+import { ProfilesComponent } from './profiles/profiles.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
     LoginComponent,
-    NewUserComponent
+    NewUserComponent,
+    ProfilesComponent
   ],
   imports: [
     BrowserModule, RouterModule,AppRoutingModule, FormsModule, HttpClientModule, CommonModule
