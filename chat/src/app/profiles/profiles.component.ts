@@ -50,13 +50,26 @@ export class ProfilesComponent implements OnInit {
 
   public upgradeUser(userIdToUpgrade){
     this.registerService.sendUpgradeUser(this.userIdToUpgrade)
-    this.userIdToUpgrade = "";
+    this.userIdToUpgrade = null
+        this.ioConnection = this.registerService.onInit().subscribe((getUsers: any)=> {
+      this.usernames = [];
+      this.userIds = [];
+      this.userRole = [];
+      
+      for (let i = 0; i< getUsers.length; i++){
+        this.usernames.push(getUsers[i].username)
+        this.userIds.push(getUsers[i].userId)
+        this.userRole.push(getUsers[i].role)
+        
+      }
+    }); 
+    
 
   }
   public deleteUser(deletedUserId){
     this.registerService.sendDeletedUser(this.deletedUserId);
     this.deletedUserId = null;
-    this.router.navigateByUrl('profiles');
+    // this.router.navigateByUrl('profiles');
     this.ioConnection = this.registerService.onInit().subscribe((getUsers: any)=> {
       this.usernames = [];
       this.userIds = [];

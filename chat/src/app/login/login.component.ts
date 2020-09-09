@@ -56,6 +56,7 @@ public loginfunc(email, pwd){
     this.ioConnection = this.registerService.onLogin().subscribe((auth: any)=> {
       localStorage.setItem('username', auth.username);  
       localStorage.setItem('role', auth.role);  
+      console.log(auth.username)
       localStorage.setItem('valid', auth.valid); 
       console.log(localStorage.getItem('email'));
       if (localStorage.getItem('valid') == "true"){

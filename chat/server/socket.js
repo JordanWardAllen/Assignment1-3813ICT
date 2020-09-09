@@ -17,6 +17,7 @@ module.exports = {
                 // console.log(deletedUserId)
                 // console.log(fileData.User[0])        
                 io.emit('getUsers', fileData.User);    
+                io.emit('chat', fileData.Chat);
             })
             // console.log(fileData)
             
@@ -30,12 +31,12 @@ module.exports = {
                 // stringObj : JSON.parse(this.stringJson)
                 // console.log(chat)
                 // io.emit('chat', chat);
-
+                
                 fs.readFile('../dataExternal.json', (err, data) => {
                     if (err) throw err;
                     var fileData = JSON.parse(data)
                     
-                    fileData.Chat.push(chat)
+                    fileData.Chat.push(chat.messagecontent)
                     stringedData = JSON.stringify(fileData)
                     // console.log(stringedData)
                     
@@ -43,6 +44,7 @@ module.exports = {
                         if (err) throw err;
                         // console.log(stringedData)
                     })
+                    io.emit('chat', fileData.Chat);
                 })
             }),
             socket.on('auth', (auth) =>{
@@ -58,7 +60,7 @@ module.exports = {
                 var customer = {};
                 customer.email = "";
                 customer.pwd = "";
-                customer.id = "";
+                customer.userId = "";
                 customer.role = "";
                 customer.username = "";
                 customer.valid = "false";
@@ -67,7 +69,8 @@ module.exports = {
                     if (auth.email == fileData.User[i].email && auth.pwd == fileData.User[i].pwd){  
                         customer.email = fileData.User[i].email;
                         customer.pwd = fileData.User[i].pwd;
-                        customer.id = fileData.User[i].id;
+                        customer.userId = fileData.User[i].userId;
+                        customer.username = fileData.User[i].username;
                         customer.role = fileData.User[i].role;
                         customer.valid = "true";
                     }
@@ -148,7 +151,8 @@ module.exports = {
                     if (err) throw err;
                     console.log("Write attempt")
                     console.log(stringedData)
-                })        
+                })  
+                io.emit('getUsers', fileData.User);      
             })
         })
 
